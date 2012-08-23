@@ -310,7 +310,7 @@ casper.start();
 casper.run();
 ```
 
-### [The Answer is Here!](https://github.com/yotsumoto/casperjs-goto/blob/master/quiz.png) ###
+### [Here is The Answer!](https://github.com/yotsumoto/casperjs-goto/blob/master/quiz.png) ###
 
 
 Thank you.
