@@ -85,8 +85,8 @@ casper.then = function then(step) {
         step.executed = false;                 // Added:  New Property. This navigation step is executed already or not.
         this.emit('step.added', step);         // Moved:  from bottom
     } else {
-
-      if( !this.steps[this.current].executed ) {  // Added:  Add step to this.steps only in the case of not being executed yet.
+      var isWaitSuccessFun = step.name.indexOf('successThen') != -1; // check if it's then step of waitFor
+      if( isWaitSuccessFun || !this.steps[this.current].executed ) {  // Added:  Add step to this.steps only in the case of not being executed yet.
         // insert substep a level deeper
         try {
 //          step.level = this.steps[this.step - 1].level + 1;   <=== Original
@@ -101,7 +101,9 @@ casper.then = function then(step) {
         this.steps.splice(insertIndex, 0, step);
         step.executed = false;                    // Added:  New Property. This navigation step is executed already or not.
         this.emit('step.added', step);            // Moved:  from bottom
-      }                                           // Added:  End of if() that is added.
+      } else {                                          // Added:  End of if() that is added.
+        //self.log('Step ' + step.name + ' was not executed because of do_while modification');
+      }
 
     }
 //    this.emit('step.added', step);   // Move above. Because then() is not always adding step. only first execution time.
